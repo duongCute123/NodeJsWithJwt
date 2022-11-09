@@ -81,6 +81,20 @@ router.route("/register").post(function (req, res) {
             res.json({ err: "Lỗi thêm rồi" })
         })
 })
+//Tìm người dùng sử dụng hệ thống
+router.route('/getUser/:emailaddress').get(function (req, res) {
+    User.findOne({
+        emailaddres: req.body.emailaddres},function (err,user) {
+            if (err) {
+                console.log(err);
+                res.json("Lỗi lấy dữ liệu nhá")
+            }else{
+                console.log("Lấy thành công nhá bạn");
+                res.json(req.body)
+            }
+        }
+    )
+})
 //Đăng nhập vào
 router.route("/login").post(function (req, res) {
     User.findOne({
